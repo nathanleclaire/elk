@@ -9,10 +9,12 @@ logstash:
     - "5000:5000"
     - "5000:5000/udp"
   environment:
-    #LOGSPOUT: ignore 
+    # otherwise logstash will keep sending its own logs to itself over and
+    # over... not fun
+    LOGSPOUT: ignore 
   links:
     - elasticsearch:elasticsearch
-  command: -f /etc/logstash.conf.sample
+  command: -f /etc/logstash.sample.conf
 kibana:
   build: dockerfiles/kibana
   ports:
@@ -23,5 +25,5 @@ logspout:
   environment:
     DEBUG: true
   volumes:
-    - /var/run/docker.sock:/tmp/docker.sock
+    - /var/run/docker.sock:/var/run/docker.sock
   command: syslog://localhost:5000

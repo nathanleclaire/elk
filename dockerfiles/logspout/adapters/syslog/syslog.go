@@ -66,6 +66,12 @@ func NewSyslogAdapter(route *router.Route) (router.LogAdapter, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Printf("%+v", SyslogAdapter{
+		route: route,
+		conn:  conn,
+		tmpl:  tmpl,
+	})
 	return &SyslogAdapter{
 		route: route,
 		conn:  conn,
