@@ -1,0 +1,31 @@
+elasticsearch:
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+logstash:
+  ports:
+    - "5000:5000"
+    - "5000:5000/udp"
+  environment:
+    # otherwise logstash will keep sending its own logs to itself over and
+    # over... not fun
+    LOGSPOUT: ignore 
+  command: -f /etc/logstash.sample.conf
+kibana:
+  ports:
+    - "80:80"
+logspout:
+  environment:
+    DEBUG: true
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  command: syslog://localhost:5000
+cadvisor:
+  image: google/cadvisor:latest
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+  ports:
+    - "8080:8080"
