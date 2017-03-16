@@ -385,4 +385,4 @@
 #http.jsonp.enable: true
 
 http.cors.enabled: true
-http.cors.allow-origin: http://mycompany.com
+http.cors.allow-origin: "/.*/"
