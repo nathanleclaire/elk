@@ -9,14 +9,14 @@ logstash:
   environment:
     # otherwise logstash will keep sending its own logs to itself over and
     # over... not fun
-    LOGSPOUT: ignore 
+    LOGSPOUT: ignore
   command: -f /etc/logstash.sample.conf
 kibana:
   ports:
     - "80:80"
 logspout:
   environment:
-    DEBUG: true
+    DEBUG: "true"
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
   command: syslog://localhost:5000

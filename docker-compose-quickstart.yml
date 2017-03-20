@@ -2,7 +2,7 @@ elasticsearch:
   extends:
     file: docker-compose-common.yml
     service: elasticsearch
-  image: nathanleclaire/elasticsearch:43d2b4f914a192d0de221cb744dab665b07f1268
+  build: dockerfiles/elasticsearch
 logstash:
   extends:
     file: docker-compose-common.yml
